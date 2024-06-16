@@ -22,6 +22,8 @@ return {
 			"jdtls",
 			"pyright",
 			"rust_analyzer",
+			"gopls",
+			"golangci-lint-ls",
 		})
 
 		mason_tool_installer.setup({
