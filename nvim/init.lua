@@ -1,2 +1,1 @@
-require("michael.core")
-require("michael.lazy")
+require("core")
