@@ -4,7 +4,10 @@ if not status then
 end
 
 local config = {
-  cmd = { vim.fn.expand('~/.local/share/nvim/mason/bin/jdtls') },
+  cmd = {
+    vim.fn.expand('~/.local/share/nvim/mason/bin/jdtls'),
+    '--jvm-arg=-javaagent:' .. os.getenv('HOME') .. '/.local/share/nvim/mason/packages/jdtls/lombok.jar',
+  },
   root_dir = vim.fs.dirname(vim.fs.find({ '.gradlew', '.git', 'mvnw' }, { upward = true })[1]),
   on_attach = function(client, bufnr)
     jdtls.setup_dap({ hotcodereplace = 'auto' })
