@@ -1,20 +1,21 @@
 return {
-    "stevearc/conform.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    config = function()
-	local conform = require("conform")
+  'stevearc/conform.nvim',
+  event = { 'BufReadPre', 'BufNewFile' },
+  config = function()
+    local conform = require('conform')
 
-	conform.setup({
-	    formatters_by_ft = {
-		java = { 'google-java-format' },
-		json = { "prettier" },
-		lua = { "stylua"}
-	    },
-	    format_on_save = {
-		lsp_fallback = true,
-		async = false,
-		timeout_ms = 1000
-	    }
-	})
-    end
+    conform.setup({
+      formatters_by_ft = {
+        java = { 'google-java-format' },
+        json = { 'prettier' },
+        lua = { 'stylua' },
+        go = { 'gofmt' },
+      },
+      format_on_save = {
+        lsp_fallback = true,
+        async = false,
+        timeout_ms = 1000,
+      },
+    })
+  end,
 }
