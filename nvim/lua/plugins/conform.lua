@@ -10,6 +10,7 @@ return {
         json = { 'prettier' },
         lua = { 'stylua' },
         go = { 'gofmt' },
+        zig = { 'zigfmt' },
       },
       format_on_save = {
         lsp_fallback = true,
