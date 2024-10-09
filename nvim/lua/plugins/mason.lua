@@ -14,7 +14,7 @@ return {
 
     mason.setup({})
     mason_lspconfig.setup({
-      ensure_installed = { 'jdtls', 'lua_ls', 'gopls', 'zls' },
+      ensure_installed = { 'jdtls', 'lua_ls', 'gopls', 'zls', 'ols' },
       automatic_installation = true,
     })
     mason_tool_installer.setup({
