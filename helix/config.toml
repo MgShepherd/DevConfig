@@ -1,0 +1,17 @@
+theme = "bogster"
+
+[editor]
+line-number = "relative"
+mouse = false
+
+[editor.statusline]
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+separator = "|"
+left = ["mode", "spinner"]
+center = ["file-name"]
+
+[keys.normal]
+0 = "goto_line_start"
+1 = "goto_line_end"
