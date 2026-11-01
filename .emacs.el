@@ -37,6 +37,9 @@
   :config
   (evil-collection-init))
 
+(with-eval-after-load 'evil
+  (defalias #'forward-evil-word #'forward-evil-symbol))
+
 ;; theme
 (use-package modus-themes
   :ensure t
@@ -103,13 +106,25 @@
   :hook ((c-mode go-mode) . eglot-ensure))
 
 ;; show documentation for item at point
+(defun my/eldoc-snapshot ()
+  "Show a static copy of the current ElDoc documentation."
+  (let ((source (eldoc-doc-buffer))
+        (buf (get-buffer-create "*eldoc snapshot*")))
+    (with-current-buffer buf
+      (special-mode)
+      (let ((inhibit-read-only t))
+        (erase-buffer)
+        (insert-buffer-substring source)
+        (goto-char (point-min))))
+    (display-buffer buf)))
+
 (defun my/lookup-doc ()
   "Show documentation for the thing at point."
   (interactive)
   (cond
    ;; C, Go, etc. via the language server
    ((and (fboundp 'eglot-managed-p) (eglot-managed-p))
-    (eldoc-doc-buffer t))
+    (my/eldoc-snapshot))
    ;; Elisp: use Emacs's built-in help
    ((derived-mode-p 'emacs-lisp-mode 'lisp-interaction-mode)
     (if-let* ((sym (symbol-at-point)))
@@ -160,6 +175,10 @@
       (message "%s" (mapconcat #'flymake-diagnostic-text diags "\n"))
     (message "No diagnostics on this line")))
 
+;; magit for git management
+(use-package magit
+  :ensure t)
+
 ;; general for keybinds
 (use-package general
   :ensure t
@@ -180,7 +199,8 @@
     "fs" #'consult-ripgrep
     "d" #'my/show-line-diagnostics
     "e" #'find-file
-    "b" #'consult-buffer))
+    "b" #'consult-buffer
+    "g" #'magit-status))
 
 ;; compile for better compilation buffer output
 (use-package compile
@@ -189,6 +209,6 @@
   :custom
   (compilation-scroll-output t))
 
-;; TODO: Add magit
-(use-package magit
-  :ensure t)
+;; Add local MGS mode to path (will not work for other machines)
+(add-to-list 'load-path (expand-file-name "~/Documents/Language/mgs-mode"))
+(require 'mgs-mode)
