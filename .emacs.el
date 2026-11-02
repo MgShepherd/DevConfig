@@ -9,7 +9,7 @@
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
-(set-face-attribute 'default nil :font "Jetbrains Mono" :height 160)
+(set-face-attribute 'default nil :font "Jetbrains Mono" :height 140)
 (setq display-line-numbers-type 'relative)
 (global-display-line-numbers-mode t)
 (setq auto-save-default nil)
