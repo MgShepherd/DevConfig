@@ -26,10 +26,18 @@
 (use-package evil
   :ensure t
   :init
+  (setq evil-want-C-u-scroll t)
   (setq evil-want-keybinding nil)
   (setq evil-want-integration t)
   :config
   (evil-mode 1))
+
+(define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
+(define-key evil-visual-state-map (kbd "C-u") 'evil-scroll-up)
+(define-key evil-insert-state-map (kbd "C-u")
+  (lambda ()
+    (interactive)
+    (evil-delete (point-at-bol) (point))))
 
 (use-package evil-collection
   :ensure t
