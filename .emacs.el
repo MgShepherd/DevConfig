@@ -15,6 +15,7 @@
 (setq auto-save-default nil)
 (setq make-backup-files nil)
 (setq create-lockfiles nil)
+(setq-default tab-width 2)
 
 ;; Setup package manager
 (require 'package)
